@@ -61,7 +61,7 @@ cd gitExample/Lab2
 
 **Windows:**
 
-```powershell
+```text
 python -m venv venv
 ```
 

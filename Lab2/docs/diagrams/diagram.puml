@@ -1,0 +1,76 @@
+@startuml
+
+left to right direction
+
+actor "Водитель такси" as Driver
+actor "Администратор" as Admin
+
+rectangle "Система управления водителями" {
+
+    ' --- Водитель ---
+
+    usecase "Регистрация" as UC_Register
+    usecase "Ввести ФИО" as UC_FIO_Reg
+    usecase "Ввести возраст" as UC_Age_Reg
+    usecase "Стаж за рулем" as UC_Experience_Reg
+
+    usecase "Вход в систему" as UC_Login_Driver
+    usecase "Открыть профиль водителя" as UC_OpenProfile_Driver
+    usecase "Посмотреть информацию о водителе" as UC_ViewInfo_Driver
+
+    usecase "ФИО" as UC_FIO_View_Driver
+    usecase "Возраст" as UC_Age_View_Driver
+    usecase "Стаж за рулем" as UC_Experience_View_Driver
+
+
+    ' --- Администратор ---
+
+    usecase "Войти в систему" as UC_Login_Admin
+    usecase "Посмотреть список водителей" as UC_DriverList
+    usecase "Открыть профиль водителя" as UC_OpenProfile_Admin
+    usecase "Посмотреть информацию о водителе" as UC_ViewInfo_Admin
+
+    usecase "ФИО" as UC_FIO_View_Admin
+    usecase "Возраст" as UC_Age_View_Admin
+    usecase "Стаж за рулем" as UC_Experience_View_Admin
+
+    usecase "Заблокировать водителя\n(уволить)" as UC_Block
+}
+
+
+' =========================
+' Связи водителя
+' =========================
+
+Driver -- UC_Register
+Driver -- UC_Login_Driver
+
+UC_Register ..> UC_FIO_Reg : <<include>>
+UC_Register ..> UC_Age_Reg : <<include>>
+UC_Register ..> UC_Experience_Reg : <<include>>
+
+UC_Login_Driver -- UC_OpenProfile_Driver
+UC_OpenProfile_Driver -- UC_ViewInfo_Driver
+
+UC_ViewInfo_Driver ..> UC_FIO_View_Driver : <<extend>>
+UC_ViewInfo_Driver ..> UC_Age_View_Driver : <<extend>>
+UC_ViewInfo_Driver ..> UC_Experience_View_Driver : <<extend>>
+
+
+' =========================
+' Связи администратора
+' =========================
+
+Admin -- UC_Login_Admin
+
+UC_Login_Admin -- UC_DriverList
+UC_DriverList -- UC_OpenProfile_Admin
+
+UC_OpenProfile_Admin -- UC_ViewInfo_Admin
+UC_OpenProfile_Admin -- UC_Block
+
+UC_ViewInfo_Admin ..> UC_FIO_View_Admin : <<extend>>
+UC_ViewInfo_Admin ..> UC_Age_View_Admin : <<extend>>
+UC_ViewInfo_Admin ..> UC_Experience_View_Admin : <<extend>>
+
+@enduml

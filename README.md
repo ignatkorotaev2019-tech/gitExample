@@ -39,9 +39,9 @@
 - Markdown
 - PlantUML
 ## Что нужно для запуска
-- Python 3
 - Git
-- Visual Studio Code (необязательно)
+- Visual Studio Code (с расширением python)
+- Хорошее настроение
 
 ## Установка и запуск
 
